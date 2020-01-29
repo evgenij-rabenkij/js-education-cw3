@@ -1,0 +1,25 @@
+{
+  "name": "js_core_npm_task",
+  "version": "1.0.0",
+  "description": "[JS Core] - npm task",
+  "main": "index.js",
+  "scripts": {
+    "preexecute_js": "node pre_execute.js",
+    "execute_js": "node",
+    "postexecute_js": "node post_execute.js",
+    "babel": "babel",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "^6.23.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
+    "sax": "^1.2.4",
+    "vue": "^2.6.11"
+  }
+}
