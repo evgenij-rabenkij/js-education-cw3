@@ -1,0 +1,24 @@
+{
+  "name": "wedriver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "go_to_bbc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prebbc": "npm update",
+    "bbc": "node go_to_bbc.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "selenium-webdriver": "^3.6.0",
+    "chromedriver": "^79.0.3",
+    "geckodriver": "^1.19.1",
+    "iedriver": "^3.14.1"
+  },
+  "devDependencies": {
+    "chromedriver": "^79.0.3",
+    "geckodriver": "^1.19.1",
+    "iedriver": "^3.14.1"
+  }
+}
