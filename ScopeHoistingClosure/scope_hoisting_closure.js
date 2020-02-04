@@ -144,7 +144,7 @@ function idContainer() {
         get: function(){
             return  this.id;
         },
-            set: function(value){
+        set: function(value){
             this.id = value;
         }
     });
@@ -155,3 +155,22 @@ let container = new idContainer();
 console.log(container.id);//DefaultID
 container.id = "NewID"
 console.log(container.id);//NewID
+
+
+//Second implementation (through closure)
+function passwordStorage(){
+    let password = "default_password";
+    this.password = function (newPassword){
+        if(!arguments.length){
+            return password;
+        }
+        password = newPassword;
+    }
+}
+
+let storage = new passwordStorage();
+console.log(storage.password());//default_password
+storage.password("another_password");
+console.log(storage.password());//another_password
+
+
