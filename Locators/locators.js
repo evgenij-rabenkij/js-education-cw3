@@ -46,11 +46,11 @@ async function findElementsInvoke(){
     await bbcRefresh();
     
     //Get array of webelements with XPath
-    await findArrayElements(By.xpath('//div[@id="orb-nav-links"]/ul/li[ contains(@class,"news") or contains(@class, "reel") or contains(@class, "travel") or contains(@class, "culture") ]'))
+    await findArrayElements(By.xpath('//div[@id="orb-nav-links"]/ul/li[position() mod 2 = 0 and not(contains(@class, "hide"))]'))
     .then(elems => console.log(elems));//Array(4) [WebElement, WebElement, WebElement, WebElement]
     await bbcRefresh();
     //Get array of webelements with Css
-    await findArrayElements(By.css('div#orb-nav-links>ul>li[class*="e"][class*="c"]:not([class*=i]):not([class*=h])'))
+    await findArrayElements(By.css('div#orb-nav-links>ul>li:nth-child(2n):not([class*=hide])'))
     .then(elems => console.log(elems));//Array(4) [WebElement, WebElement, WebElement, WebElement]
     await bbcRefresh();
 
