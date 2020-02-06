@@ -2,9 +2,14 @@
 
 require('chromedriver');
 
-async function findElement(locator){
+async function findOneElement(locator){
     let element =  await webdriver.findElement(locator);
     return element;
+}
+
+async function findArrayElements(locator){
+    let elements =  await webdriver.findElements(locator);
+    return elements;
 }
 
 async function bbcRefresh(){
@@ -22,40 +27,34 @@ let webdriver =  new Builder().forBrowser("chrome").build();
 webdriver.manage().window().maximize();
 webdriver.get('https://www.bbc.com');
 
-async function findElementInvoke(){
-    await findElement(By.xpath('//input[@id="orb-search-q"]')).then(el => el.sendKeys("Search Field with XPath", Key.RETURN));//Search field with XPath
+async function findElementsInvoke(){
+    await findOneElement(By.xpath('//input[@id="orb-search-q"]')).then(el => el.sendKeys("Search Field with XPath", Key.RETURN));//Search field with XPath
     await bbcRefresh();
-    await findElement(By.css('input#orb-search-q')).then(el => el.sendKeys("Search Field with CSS", Key.RETURN));//Search field with CSS
+    await findOneElement(By.css('input#orb-search-q')).then(el => el.sendKeys("Search Field with CSS", Key.RETURN));//Search field with CSS
     await bbcRefresh();
-    await findElement(By.xpath('//a[@class="block-link__overlay-link"]')).then(el => el.click());//Main news block with XPath
+    await findOneElement(By.xpath('//a[@class="block-link__overlay-link"]')).then(el => el.click());//Main news block with XPath
     await bbcRefresh();
-    await findElement(By.css('a.block-link__overlay-link')).then(el => el.click());//Main news block with CSS
+    await findOneElement(By.css('a.block-link__overlay-link')).then(el => el.click());//Main news block with CSS
     await bbcRefresh();
-    await findElement(By.xpath('//li[@class="orb-nav-sport"]/a')).then(el => el.click());//Sport button with XPath
+    await findOneElement(By.xpath('//li[@class="orb-nav-sport"]/a')).then(el => el.click());//Sport button with XPath
     await bbcRefresh();
-    await findElement(By.css('li.orb-nav-sport>a')).then(el => el.click());//Sport button with CSS
+    await findOneElement(By.css('li.orb-nav-sport>a')).then(el => el.click());//Sport button with CSS
     await bbcRefresh();
-    await findElement(By.xpath('//li[@class="media-list__item media-list__item--2"]/div/a[@rev="news|overlay"]')).then(el => el.click());//Middle secondary news block with XPath
+    await findOneElement(By.xpath('//li[@class="media-list__item media-list__item--2"]/div/a[@rev="news|overlay"]')).then(el => el.click());//Middle secondary news block with XPath
     await bbcRefresh();
-    await findElement(By.css('section.module.module--news.module--collapse-images > div > ul > li.media-list__item.media-list__item--2 > div > a')).then(el => el.click());//Middle secondary news block with CSS
+    await findOneElement(By.css('section.module.module--news.module--collapse-images > div > ul > li.media-list__item.media-list__item--2 > div > a')).then(el => el.click());//Middle secondary news block with CSS
     await bbcRefresh();
-    await findElement(By.xpath('//li[@class="orb-nav-newsdotcom"]/a')).then(el => el.click());//News button with XPath
+    
+    //Get array of webelements with XPath
+    await findArrayElements(By.xpath('//div[@id="orb-nav-links"]/ul/li[ contains(@class,"news") or contains(@class, "reel") or contains(@class, "travel") or contains(@class, "culture") ]'))
+    .then(elems => console.log(elems));//Array(4) [WebElement, WebElement, WebElement, WebElement]
     await bbcRefresh();
-    await findElement(By.css('li.orb-nav-newsdotcom>a')).then(el => el.click());//News button with CSS
+    //Get array of webelements with Css
+    await findArrayElements(By.css('div#orb-nav-links>ul>li[class*="e"][class*="c"]:not([class*=i]):not([class*=h])'))
+    .then(elems => console.log(elems));//Array(4) [WebElement, WebElement, WebElement, WebElement]
     await bbcRefresh();
-    await findElement(By.xpath('//li[@class="orb-nav-reeldotcom"]/a')).then(el => el.click());//Reel button with XPath
-    await bbcRefresh();
-    await findElement(By.css('li.orb-nav-reeldotcom>a')).then(el => el.click());//Reel button with CSS
-    await bbcRefresh();
-    await findElement(By.xpath('//li[@class="orb-nav-traveldotcom"]/a')).then(el => el.click());//Travel button with XPath
-    await bbcRefresh();
-    await findElement(By.css('li.orb-nav-traveldotcom>a')).then(el => el.click());//Travel button with CSS
-    await bbcRefresh();
-    await findElement(By.xpath('//li[@class="orb-nav-culture"]/a')).then(el => el.click());//Culture button with XPath
-    await bbcRefresh();
-    await findElement(By.css('li.orb-nav-culture>a')).then(el => el.click());//culture button with CSS
-    await bbcRefresh();
+
     await webdriver.quit();
 }
 
-findElementInvoke();
+findElementsInvoke();
