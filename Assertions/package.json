@@ -1,0 +1,16 @@
+{
+  "name": "assertions",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "npm update",
+    "test": "jasmine JASMINE_CONFIG_PATH=jasmine.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jasmine": "2.5.3",
+    "jasmine-expect": "*"
+  }
+}
