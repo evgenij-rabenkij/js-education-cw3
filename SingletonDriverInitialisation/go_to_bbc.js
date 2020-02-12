@@ -1,23 +1,15 @@
-"use strict";
 require('chromedriver');
 require('geckodriver');
 require('iedriver');
 
-const {Builder} = require('selenium-webdriver');
+let getInstanceOfWebdriver = require("./singleton_webdriver.js");
 
-async function goToBBC(browserName){
-    let webdriver = require("./webdriver_as_singleton.js");
-    webdriver = await new Builder().forBrowser(browserName).build();
-    await webdriver.get('https://www.bbc.com');
+async function goToBBC(browserName){   
+    let webdriver = getInstanceOfWebdriver(browserName);
+    await webdriver.get('https://www.bbc.com/');
+    await webdriver.quit();
 }
 
-  
-goToBBC("chrome");
-
-goToBBC("firefox");
-
-goToBBC("ie");
-
-
-
-
+goToBBC('ie');
+goToBBC('chrome');
+goToBBC('firefox');
