@@ -3,8 +3,8 @@ describe('Custom Waiters Test', function() {
     let urlBBC = "https://www.bbc.com/";
     let homeButton = element(by.xpath("//div[@class = 'orb-nav-section orb-nav-blocks']/a"));
     let hiddenMusicButton = element(by.xpath("//div[@id='orb-nav-links']/descendant::li[contains(@class, 'orb-nav-music')]"));
-    let elementWithInvalidPass = element(by.xpath("%%%invalid!!!pass"));
-    let unknownElement = element(by.xpath("//div[@id='unknown-id']"));
+    let notPresentedElement1 = element(by.xpath("//div[@id='not-present-id']"));
+    let notPresentedElement2 = element(by.xpath("//a[@class='not-class-id']"));
     let error;
 
     browser.ignoreSynchronization = true;
@@ -34,18 +34,18 @@ describe('Custom Waiters Test', function() {
         expect(Math.floor((new Date() - date) / 1000)).toEqual(8);
     });
 
-    it('ElementWithInvalidPass shouldn`t displayed', async function() {//pass within ~8sec
-        console.log("\nElementWithInvalidPass isDisplayedWait test");
-        await isDisplayedWait(elementWithInvalidPass, 2, 8).catch((err) => {error = err;});
+    it('NotPresentedElement1 shouldn`t displayed', async function() {//pass within ~8sec
+        console.log("\nNotPresentedElement1 isDisplayedWait test");
+        await isDisplayedWait(notPresentedElement1, 2, 8).catch((err) => {error = err;});
         expect([error.name, error.message]).toEqual(["NotDisplayedElementError", "Such element doesn`t displays."]);
         expect(Math.floor((new Date() - date) / 1000)).toEqual(8);
     });
 
-    it('UnknownElement shouldn`t displayed', async function() {//pass within ~8sec
-        console.log("\nUnknownElement isDisplayedWait test");
-        await isDisplayedWait(unknownElement, 2, 8).catch((err) => {error = err;});
+    it('NotPresentedElement2 shouldn`t displayed', async function() {//pass within ~7sec
+        console.log("\nNotPresentedElement2 isDisplayedWait test");
+        await isDisplayedWait(notPresentedElement2, 5, 7).catch((err) => {error = err;});
         expect([error.name, error.message]).toEqual(["NotDisplayedElementError", "Such element doesn`t displays."]);
-        expect(Math.floor((new Date() - date) / 1000)).toEqual(8);
+        expect(Math.floor((new Date() - date) / 1000)).toEqual(7);
     });
 
     it('HomeButton should be present', async function() {//pass within ~3sec
@@ -54,23 +54,23 @@ describe('Custom Waiters Test', function() {
         expect(Math.floor((new Date() - date) / 1000)).toEqual(3);
     });
 
-    it('MusicButton should be present', async function() {//pass within ~5sec
+    it('MusicButton should be present', async function() {//pass within ~3sec
         console.log("\nMusicButton isPresentWait test");
-        await isPresentWait(hiddenMusicButton, 5, 8);
-        expect(Math.floor((new Date() - date) / 1000)).toEqual(5);
+        await isPresentWait(hiddenMusicButton, 3, 8);
+        expect(Math.floor((new Date() - date) / 1000)).toEqual(3);
     });
 
-    it('ElementWithInvalidPass shouldn`t be present', async function() {//pass within ~8sec
-        console.log("\nElementWithInvalidPass isPresentWait test");
-        await isPresentWait(elementWithInvalidPass, 5, 8).catch((err) => {error = err;});
+    it('NotPresentedElement1 shouldn`t be present', async function() {//pass within ~8sec
+        console.log("\nNotPresentedElement1 isPresentWait test");
+        await isPresentWait(notPresentedElement1, 5, 8).catch((err) => {error = err;});
         expect([error.name, error.message]).toEqual(["NotPresentElementError", "Such element doesn`t presents."]);
         expect(Math.floor((new Date() - date) / 1000)).toEqual(8);
     });
-
-    it('UnknownElement shouldn`t be present', async function() {
-        console.log("\nUnknownElement isPresentWait test");
-        await isPresentWait(unknownElement, 5, 8).catch((err) => {error = err;});
-        expect([error.name, error.message]).toEqual(["NotPresentElementError", "Such element doesn`t presents."]);//pass within ~8sec
-        expect(Math.floor((new Date() - date) / 1000)).toEqual(8);
+    
+    it('NotPresentedElement2 shouldn`t be present', async function() {//pass within ~7sec
+        console.log("\nNotPresentedElement2 isPresentWait test");
+        await isPresentWait(notPresentedElement2, 4, 7).catch((err) => {error = err;});
+        expect([error.name, error.message]).toEqual(["NotPresentElementError", "Such element doesn`t presents."]);
+        expect(Math.floor((new Date() - date) / 1000)).toEqual(7);
     });
 });
