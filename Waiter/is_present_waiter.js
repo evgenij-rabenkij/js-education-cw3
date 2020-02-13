@@ -1,21 +1,27 @@
 "use strict";
 
- async function isPresentWait(element, timeOut, maxTimeOut){
-    return await new Promise((resolve) => {
+let NotPresentElementError = require("./not_present_element_error.js");
+
+async function isPresentWait(element, timeOut, maxTimeOut){
+    await new Promise((resolve, reject) => {
         setInterval(async function(){
             if(await element.isPresent().then().catch((err) => {})){
-                resolve(true);
+                resolve();
                 clearInterval(this);
             }
             maxTimeOut -= timeOut;
             if(maxTimeOut <= timeOut){
                 setTimeout(async function(){
-                    resolve(await  element.isPresent().then().catch((err) => {resolve(false)}));
+                    if(await  element.isPresent().then().catch((err) => {})){
+                        resolve();
+                    }else{
+                        reject(new NotPresentElementError("Such element doesn`t presents."));
+                    }
                 }, maxTimeOut * 1000);
                 clearInterval(this);
             }
-        },  timeOut * 1000);
-    });     
+        }, timeOut * 1000);
+    });
 }
 
 module.exports = isPresentWait;
