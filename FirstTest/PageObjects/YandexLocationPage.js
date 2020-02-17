@@ -1,12 +1,17 @@
-let PageObject = require("./PageObject.js")
+const isPresentWait = require("../IsPresentWaiter/IsPresentWait.js");
 
-module.exports =class YandexLocationPage extends PageObject{
-    locationInputField;
-    firstRelativeLocationBar;
-    async findLocationInputField(){
-        this.locationInputField = await this.getElement(by.xpath("//*[@class='input__control input__input']"));
+class YandexLocationPage{
+    constructor(){
+        this.locationInputField = element(by.css("input[class='input__control input__input']"));
+        this.firstRelativeLocationBar =  element(by.css("li:first-child"));
     }
-    async findFirstRelativeLocationBar(){
-        this.firstRelativeLocationBar = await this.getElement(by.xpath("//li[1]"));
+    async setNewLocation(location){
+        await isPresentWait(this.locationInputField, 0.2, 3);
+        await this.locationInputField.clear(location);
+        await this.locationInputField.sendKeys(location);
+        await isPresentWait(this.firstRelativeLocationBar, 0.6, 3);
+        await this.firstRelativeLocationBar.click();
     }
 }
+
+module.exports = YandexLocationPage;

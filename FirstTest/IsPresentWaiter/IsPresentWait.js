@@ -1,6 +1,4 @@
-"use strict";
-
-let NotPresentElementError = require("./NotPresentElementError.js");
+const NotPresentElementError = require("./NotPresentElementError.js");
 
 async function isPresentWait(element, timeOut, maxTimeOut){
     await new Promise((resolve, reject) => {

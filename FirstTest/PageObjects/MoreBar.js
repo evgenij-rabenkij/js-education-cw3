@@ -1,8 +1,7 @@
-let PageObject = require("./PageObject.js")
-
-module.exports =class MoreBar extends PageObject{
-    moreBarElements;
-    async findMoreBarElements(){
-        this.moreBarElements = await this.getElements(By.xpath("//*[contains(@class, 'home-tabs__more-item') and not(contains(@class, 'i-adaptive__1'))]/a"));
+class MoreBar{
+    constructor(){
+        this.moreBarElements = element.all(by.css("div[class*='home-tabs__more-item']>a:not([data-id = 'afisha'])"));
     }
 }
+
+module.exports = MoreBar;

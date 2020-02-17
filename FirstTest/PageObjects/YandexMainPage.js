@@ -1,12 +1,14 @@
-let PageObject = require("./PageObject.js")
+const isPresentWait =  require("../IsPresentWaiter/IsPresentWait.js");
 
-module.exports =class YandexMainPage extends PageObject{
-    locationButton;
-    moreButton;
-    async findLocationButton(){
-        this.locationButton = await this.getElement(by.xpath("//*[@class='geolink__reg']"));
+class YandexMainPage{
+    constructor(){
+    this.locationButton =  element(by.css("span.geolink__reg"));
+    this.moreButton = element(by.css("a[class*='home-link home-link_blue_yes home-tabs__link home-tabs__more-switcher']"));
     }
-    async findMoreButton(){
-        this.moreButton = await this.getElement(by.xpath("//*[contains(@class, 'home-tabs__more-switcher')]"));
+    async expandMoreBar(){
+        await isPresentWait(this.moreButton, 0.2, 3);
+        await this.moreButton.click();
     }
 }
+
+module.exports = YandexMainPage;
