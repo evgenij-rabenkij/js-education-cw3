@@ -1,6 +1,6 @@
-const isPresentWait = require("../IsPresentWaiter/IsPresentWait.js");
+import {isPresentWait} from "../IsPresentWaiter/IsPresentWait.js";
 
-class YandexLocationPage{
+export class YandexLocationPage{
     constructor(){
         this.locationInputField = element(by.css("input[class='input__control input__input']"));
         this.firstRelativeLocationBar =  element(by.css("li:first-child"));
@@ -13,5 +13,3 @@ class YandexLocationPage{
         await this.firstRelativeLocationBar.click();
     }
 }
-
-module.exports = YandexLocationPage;

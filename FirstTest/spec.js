@@ -1,6 +1,6 @@
-let YandexMainPage = require("./PageObjects/YandexMainPage.js");
-let YandexLocationPage = require("./PageObjects/YandexLocationPage.js");
-let MoreBar =  require("./PageObjects/MoreBar.js");
+import {YandexMainPage} from "./PageObjects/YandexMainPage.js";
+import {YandexLocationPage} from "./PageObjects/YandexLocationPage.js";
+import {MoreBar} from "./PageObjects/MoreBar.js";
 
 describe('First test', function() {
 
@@ -8,7 +8,7 @@ describe('First test', function() {
 
     const yandexMainPage  = new YandexMainPage();
     const yandexLocationPage = new YandexLocationPage();
-    const moreBar =new MoreBar();
+    const moreBar = new MoreBar();
 
     const url = "https://yandex.by/";
     let moreBarContentLondon;

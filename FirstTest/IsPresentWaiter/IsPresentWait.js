@@ -1,6 +1,6 @@
-const NotPresentElementError = require("./NotPresentElementError.js");
+import {NotPresentElementError} from "./NotPresentElementError.js";
 
-async function isPresentWait(element, timeOut, maxTimeOut){
+export async function isPresentWait(element, timeOut, maxTimeOut){
     await new Promise((resolve, reject) => {
         setInterval(async function(){
             if(await element.isPresent()){
@@ -21,5 +21,3 @@ async function isPresentWait(element, timeOut, maxTimeOut){
         }, timeOut * 1000);
     });
 }
-
-module.exports = isPresentWait;

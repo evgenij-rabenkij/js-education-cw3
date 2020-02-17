@@ -4,5 +4,8 @@ exports.config = {
     specs: ['spec.js'],
     capabilities: {
         browserName: 'chrome'
+    },
+    onPrepare: function () {
+        require("babel-core/register")({presets: ["es2015"]});
     }
 } 
